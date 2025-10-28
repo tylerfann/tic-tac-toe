@@ -11,6 +11,7 @@ const Row = ({ board, tiles, handlePlayerMove, rowIndex }) => {
     >
       {tiles.map((el, index) => (
         <Tile
+          key={`row-${rowIndex}-tile-${index}`}
           letter={`${board[rowIndex][index]}`}
           handlePlayerMove={handlePlayerMove}
           tileIndex={index}
@@ -23,10 +24,11 @@ const Row = ({ board, tiles, handlePlayerMove, rowIndex }) => {
 const Board = ({ board, handlePlayerMove }) => {
   return (
     <div>
-      {BOARD.map((rows, index) => (
+      {BOARD.map((tiles, index) => (
         <Row
+          key={`row-${index}`}
           board={board}
-          tiles={rows}
+          tiles={tiles}
           handlePlayerMove={handlePlayerMove}
           rowIndex={index}
         />

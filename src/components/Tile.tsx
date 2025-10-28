@@ -14,7 +14,7 @@ const Tile = ({ letter, handlePlayerMove, tileIndex, rowIndex }: TileProps) => {
         alignItems: 'center',
       }}
       onClick={() => handlePlayerMove({
-        tileIndex, rowIndex
+        tileIndex, rowIndex, letter
       })}
     >
       <span style={{
