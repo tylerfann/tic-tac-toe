@@ -2,24 +2,34 @@ import Tile from "../components/Tile";
 
 const BOARD = [Array(3).fill(""), Array(3).fill(""), Array(3).fill("")];
 
-const Row = ({ tiles, setIsPlayer1Turn, isPlayer1Turn }) => {
+const Row = ({ board, tiles, handlePlayerMove, rowIndex }) => {
   return (
     <div
       style={{
         display: "flex",
       }}
     >
-      {tiles.map((el) => (
-        <Tile letter={el} setIsPlayer1Turn={setIsPlayer1Turn} isPlayer1Turn={isPlayer1Turn} />
+      {tiles.map((el, index) => (
+        <Tile
+          letter={`${board[rowIndex][index]}`}
+          handlePlayerMove={handlePlayerMove}
+          tileIndex={index}
+          rowIndex={rowIndex}
+        />
       ))}
     </div>
   );
 };
-const Board = ({ setIsPlayer1Turn, isPlayer1Turn }) => {
+const Board = ({ board, handlePlayerMove }) => {
   return (
     <div>
-      {BOARD.map((rows) => (
-        <Row tiles={rows} setIsPlayer1Turn={setIsPlayer1Turn} isPlayer1Turn={isPlayer1Turn} />
+      {BOARD.map((rows, index) => (
+        <Row
+          board={board}
+          tiles={rows}
+          handlePlayerMove={handlePlayerMove}
+          rowIndex={index}
+        />
       ))}
     </div>
   );

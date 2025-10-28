@@ -2,7 +2,7 @@ type TileProps = {
   letter?: "X" | "O";
 };
 
-const Tile = ({ letter, setIsPlayer1Turn, isPlayer1Turn }: TileProps) => {
+const Tile = ({ letter, handlePlayerMove, tileIndex, rowIndex }: TileProps) => {
   return (
     <div
       style={{
@@ -13,7 +13,9 @@ const Tile = ({ letter, setIsPlayer1Turn, isPlayer1Turn }: TileProps) => {
         justifyContent: 'center',
         alignItems: 'center',
       }}
-      onClick={() => setIsPlayer1Turn(!isPlayer1Turn)}
+      onClick={() => handlePlayerMove({
+        tileIndex, rowIndex
+      })}
     >
       <span style={{
         fontSize: '90px',
