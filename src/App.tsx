@@ -1,17 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import Board from "./components/Board";
 import { updateBoard, getInitialBoard, getWinningPlayer } from "./utils/board";
 
-// keep track of the board
-// keep track of player turn
-// player 1 is always "X"
-// handle clicking the board
-// determine winner
-
 function App() {
   const [isPlayer1Turn, setIsPlayer1Turn] = useState(true);
   const [board, setBoard] = useState(getInitialBoard());
+  const [winner, setWinner] = useState();
 
   const handlePlayerMove = ({ tileIndex, rowIndex, letter}) => {
     if (!letter) {
@@ -24,9 +19,23 @@ function App() {
   
       setBoard(newBoard);
       const winner = getWinningPlayer(newBoard);
+
+      console.log('==== YAYYY', {
+        newBoard,
+        winner,
+      });
+      if (winner) {
+        setWinner(winner)
+      }
       setIsPlayer1Turn(!isPlayer1Turn);
     }
   };
+
+  if (winner) {
+    return (
+      <h1>{`Player ${winner === 'X' ? '1' : '2'} wins!`}</h1>
+    )
+  }
 
   return (
     <div>
