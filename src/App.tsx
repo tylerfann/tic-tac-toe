@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./App.css";
 import Board from "./components/Board";
 import { updateBoard, getInitialBoard, getWinningPlayer } from "./utils/board";
@@ -8,7 +8,7 @@ function App() {
   const [board, setBoard] = useState(getInitialBoard());
   const [winner, setWinner] = useState();
 
-  const handlePlayerMove = ({ tileIndex, rowIndex, letter}) => {
+  const handlePlayerMove = ({ tileIndex, rowIndex, letter }) => {
     if (!letter) {
       const newBoard = updateBoard({
         board,
@@ -16,25 +16,30 @@ function App() {
         tileIndex,
         isPlayer1Turn,
       });
-  
+
       setBoard(newBoard);
       const winner = getWinningPlayer(newBoard);
 
-      console.log('==== YAYYY', {
-        newBoard,
-        winner,
-      });
       if (winner) {
-        setWinner(winner)
+        setWinner(winner);
       }
       setIsPlayer1Turn(!isPlayer1Turn);
     }
   };
 
+  const handlePlayAgain = () => {
+    setBoard(getInitialBoard());
+    setIsPlayer1Turn(true);
+    setWinner(undefined);
+  };
+
   if (winner) {
     return (
-      <h1>{`Player ${winner === 'X' ? '1' : '2'} wins!`}</h1>
-    )
+      <div>
+        <h1>{`Player ${winner === "X" ? "1" : "2"} wins!`}</h1>
+        <button onClick={handlePlayAgain}>Play again</button>
+      </div>
+    );
   }
 
   return (

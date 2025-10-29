@@ -1,10 +1,8 @@
-const INITIAL_BOARD = [
+export const getInitialBoard = () => [
   ["", "", ""],
   ["", "", ""],
   ["", "", ""],
 ];
-
-export const getInitialBoard = () => INITIAL_BOARD;
 
 export const updateBoard = ({ board, rowIndex, tileIndex, isPlayer1Turn }) => {
   const boardCopy = [...board];
